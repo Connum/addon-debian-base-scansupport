@@ -1,7 +1,7 @@
 ---
 name: Debian Base Image with added scanning support
 version: dev
-slug: debian-base-sannsupport
+slug: debian-base-scansupport
 description: Docker Debian base images used by Home Assistant Community Add-ons with added scanning support
 url: https://github.com/connum/addon-debian-base-scansupport
 arch:
