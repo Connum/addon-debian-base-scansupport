@@ -1,5 +1,7 @@
 # Home Assistant Community Add-on: Debian Base Images
 
+**This fork adds saned and scanbd packages in order to speed up building of my WIP Scan Server Add-On**
+
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
 [![License][license-shield]](LICENSE.md)
