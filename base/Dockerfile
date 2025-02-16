@@ -33,7 +33,7 @@ RUN \
         /var/lib/apt/lists/*
 
 # Copy root filesystem
-COPY rootfs /
+#COPY rootfs /
 
 # Build arugments
 ARG BUILD_DATE
