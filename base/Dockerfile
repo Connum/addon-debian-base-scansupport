@@ -22,7 +22,7 @@ RUN \
         sane-utils \
         dbus \
         scanbd \
-    && mkdir -p /var/run/dbus/
+    && mkdir -p /var/run/dbus/ \
     && apt-get purge -y --auto-remove \
         xz-utils \
     && apt-get clean \
