@@ -23,14 +23,47 @@ RUN \
         sane-utils \
         dbus \
         scanbd \
+        git \
+        sed \
+    # sane-scan-pdf dependencies
+        bash \
+        netpbm \
+        ghostscript \
+        poppler-utils \
+        units \
+        imagemagick \
+        unpaper \
+        util-linux \
+        tesseract-ocr \
+        tesseract-ocr-all \
+        parallel \
+        bc \
+    # sane-scan-pdf
+    && git clone --branch master https://github.com/rocketraman/sane-scan-pdf.git /opt/sane-scan-pdf && \
+        chmod a+x /opt/sane-scan-pdf/scan /opt/sane-scan-pdf/scan_perpage && \
+        ln -s /opt/sane-scan-pdf/scan /usr/local/bin/sane-scan-pdf \
+    # patch sane-scan-pdf script
+    && sed -i 's|\${XDG_DATA_HOME:-\$HOME/.local/share}|/config|g' /opt/sane-scan-pdf/scan \
+    && sed -i 's|"\$DIR/scan_perpage"|/opt/sane-scan-pdf/scan_perpage|g' /opt/sane-scan-pdf/scan \
+    # add root user to scanner group
+    && usermod -a -G scanner root \
+    # cleanup
     && mkdir -p /var/run/dbus/ \
     && apt-get purge -y --auto-remove \
         xz-utils \
+    # cleanup
+    && apt-get remove --purge -y \
+        git \
+    && apt-get autoremove -y \
     && apt-get clean \
     && rm -fr \
         /tmp/* \
         /var/{cache,log}/* \
-        /var/lib/apt/lists/*
+        /var/lib/apt/lists/* \
+    # run setup script
+    chmod a+x /setup.sh \
+    && . /setup.sh \
+    && rm /setup.sh
 
 # Copy root filesystem
 #COPY rootfs /
