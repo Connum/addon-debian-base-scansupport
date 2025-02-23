@@ -59,14 +59,14 @@ RUN \
     && rm -fr \
         /tmp/* \
         /var/{cache,log}/* \
-        /var/lib/apt/lists/* \
-    # run setup script
-    chmod a+x /setup.sh \
-    && . /setup.sh \
-    && rm /setup.sh
+        /var/lib/apt/lists/*
 
 # Copy root filesystem
-#COPY rootfs /
+COPY rootfs /
+
+RUN chmod a+x /setup.sh \
+    && . /setup.sh \
+    && rm /setup.sh
 
 # Build arugments
 ARG BUILD_DATE
