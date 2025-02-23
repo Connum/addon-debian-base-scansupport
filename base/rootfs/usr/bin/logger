@@ -1,0 +1,12 @@
+#!/bin/bash
+# custom logger to make default scripts work without needing to install logging packages
+TAG=""; while getopts "t:" opt; do 
+  case $opt in 
+    t) TAG="$OPTARG" ;; 
+  esac 
+done; shift $((OPTIND-1)); 
+if [ -n "$TAG" ]; then 
+  echo "[$TAG] $@"; 
+else 
+  echo "$@";
+fi
